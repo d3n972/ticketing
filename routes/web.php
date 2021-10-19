@@ -20,4 +20,4 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-Route::middleware(['auth:sanctum', 'verified'])->get('/t',function(){return view('issues.create');});
+Route::middleware(['auth:sanctum', 'verified'])->get('/issues',function(){return view('issues.create');})->name('issues');

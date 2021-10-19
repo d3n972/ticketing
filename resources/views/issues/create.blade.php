@@ -29,11 +29,13 @@
         <form action="#" method="get">
             <div class="max-w-full mt-8">
                 <div class="grid grid-cols-1 gap-6">
-                    <div class="gap-5 grid grid-cols-2">
+                    <div class="gap-5 grid grid-cols-1">
                         <label class="block">
                             <span class="text-gray-700">{{__('Title')}}</span>
                             <input name="title" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="{{__('Title')}}">
                         </label>
+                    </div>
+                    <div class="gap-5 grid grid-cols-2">
                         <label class="block">
                             <span class="text-gray-700">{{__('Severity')}}</span>
                             <select id="sev" name="sev" class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -45,7 +47,17 @@
                                 <option value="5">{{__('Critical / Immediate')}}</option>
                             </select>
                         </label>
-
+                        <label class="block">
+                            <span class="text-gray-700">{{__('Project')}}</span>
+                            <select id="sev" name="sev" class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="0">{{__('1')}}</option>
+                                <option value="1">{{__('2')}}</option>
+                                <option value="2"'>{{__('3')}}</option>
+                                <option value="3">{{__('3')}}</option>
+                                <option value="4">{{__('Severe')}}</option>
+                                <option value="5">{{__('Critical / Immediate')}}</option>
+                            </select>
+                        </label>
                     </div>
                     <label class="block">
                         <span class="text-gray-700">{{__('Description')}}</span>
