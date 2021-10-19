@@ -1,0 +1,10 @@
+require('jszip');
+require('pdfmake');
+require('datatables.net-bs5')();
+require('datatables.net-buttons-bs5')();
+require('datatables.net-buttons/js/buttons.html5.js')();
+require('datatables.net-colreorder-bs5')();
+require('datatables.net-responsive-bs5')();
+require('datatables.net-searchbuilder-bs5')();
+var $ = require('jquery');
+var dt = require('datatables.net')(window, $);
