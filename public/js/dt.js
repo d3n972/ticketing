@@ -117495,11 +117495,10 @@ __webpack_require__(/*! datatables.net-colreorder-bs5 */ "./node_modules/datatab
 
 __webpack_require__(/*! datatables.net-responsive-bs5 */ "./node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.js")();
 
-__webpack_require__(/*! datatables.net-searchbuilder-bs5 */ "./node_modules/datatables.net-searchbuilder-bs5/js/searchBuilder.bootstrap5.js")();
+__webpack_require__(/*! datatables.net-searchbuilder-bs5 */ "./node_modules/datatables.net-searchbuilder-bs5/js/searchBuilder.bootstrap5.js")(); //var $ = require('jquery');
 
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
-var dt = __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js")(window, $);
+window.DT = __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js")(window, $);
 })();
 
 /******/ })()

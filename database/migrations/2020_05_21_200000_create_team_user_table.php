@@ -22,6 +22,7 @@ class CreateTeamUserTable extends Migration
 
             $table->unique(['team_id', 'user_id']);
         });
+
     }
 
     /**

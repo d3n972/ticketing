@@ -6,5 +6,5 @@ require('datatables.net-buttons/js/buttons.html5.js')();
 require('datatables.net-colreorder-bs5')();
 require('datatables.net-responsive-bs5')();
 require('datatables.net-searchbuilder-bs5')();
-var $ = require('jquery');
-var dt = require('datatables.net')(window, $);
+//var $ = require('jquery');
+window.DT = require('datatables.net')(window, $);

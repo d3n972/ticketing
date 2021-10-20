@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,11 @@ class CreateTeamsTable extends Migration
             $table->boolean('personal_team');
             $table->timestamps();
         });
+        $t=new Team();
+        $t->user_id=1;
+        $t->name='System';
+        $t->personal_team=true;
+        $t->save();
     }
 
     /**
