@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Mail\IssueFiled as MailIssueFiled;
+use App\Models\Issue;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,9 +21,9 @@ class IssueFiled
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Issue $i)
     {
-        //
+        return new MailIssueFiled($i);
     }
 
     /**

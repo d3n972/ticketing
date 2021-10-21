@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\IssueFiled;
 use App\Models\Issue;
+use App\Models\Severity;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Livewire\Component;
+use Illuminate\Support\Facades\Mail;
 
 class CreateTicket extends Component
 {
@@ -25,21 +29,31 @@ class CreateTicket extends Component
     public function submit(Request $r) {
 
         $validatedData = $this->validate();
+
         $validatedData['author']=$r->user()->id;
         $i=new Issue();
         $i->author=$validatedData['author'];
         $i->title=$validatedData['title'];
-        $i->severity=$validatedData['severity'];
-        $i->project=$validatedData['project'];
+        $i->severity=$validatedData['severity']??1;
+        $i->project=$validatedData['project']??1;
         $i->content=$validatedData['description'];
-        $i->save();
+        $i->assignee = 1;
+        if($i->save()){
+            //IssueFiled::dispatch($i);
+            Mail::to($r->user())->send((new \App\Mail\IssueFiled($i))->build());
+        }
 
-        dd([$validatedData,$i]);
+        session()->flash('message', 'Post successfully updated.');
 
     }
 
     public function render()
     {
-        return view('livewire.create-ticket');
+        $sevs=Severity::all();
+        $teams=Team::all();
+        return view('livewire.create-ticket',[
+            "severities"=>$sevs,
+            "teams"=>$teams
+        ]);
     }
 }

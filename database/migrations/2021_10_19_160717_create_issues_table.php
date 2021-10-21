@@ -18,12 +18,12 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class,'author');
-            $table->foreignIdFor(User::class,'assignee')->nullable();  
+            $table->foreignId('author')->constrained('users','id')->default(1);
+            $table->foreignId('assignee')->constrained('users','id')->default(1);
             $table->string('title');
             $table->longText('content');
-            $table->foreignIdFor(Project::class,'project');
-            $table->foreignIdFor(Severity::class,'severity')->default(0);
+            $table->foreignId('project')->constrained('teams');
+            $table->foreignId('severity')->constrained()->default(1);
             $table->integer('status')->default(-1);
             $table->timestamps();
         });

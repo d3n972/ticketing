@@ -9,8 +9,17 @@ class Issue extends Model
 {
     use HasFactory;
     protected $fillable=['*'];
-    public function getSeverity(){
-        return Severity::where('owner','=',0/*(int)$this->severity*/)->first()->name;
-    }
 
+
+    public function assignee()
+    {
+        return $this->hasOne(User::class,'id','assignee')->latest();
+    }
+    public function author()
+    {
+        return $this->hasOne(User::class,'id','author')->latest();
+    }
+    public function severity(){
+        return $this->hasOne(Severity::class,'id','severity')->latest();
+    }
 }
