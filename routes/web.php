@@ -26,21 +26,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('issue')->group(function () {
         Route::name('issue.')->group(function () {
-            Route::get('/', function (Request $request) {
-                $uid = $request->user()->id;
-                $tok=$request->user()->createToken('js_token')->plainTextToken;
-                return view('issues.list', [
-                    'token' => $tok
-                ]);
-            })->name('list');
-            Route::get('/new', function () {
-                return view('issues.create');
-            })->name('create');
-
-
-            Route::post('/modify',[IssueController::class,'modify_ticket'])->name('modify');
-            Route::post('/assign',function(){})->name('assign');
-            Route::post('/lock',[IssueController::class,'switchStatus'])->name('lock');
+            Route::get('/', [IssueController::class, 'index'])->name('list');
+            Route::get('/new', [IssueController::class, 'new'])->name('create');
+            Route::post('/modify', [IssueController::class, 'modify_ticket'])->name('modify');
+            Route::post('/assign',[IssueController::class, 'assign_ticket'])->name('assign');
+            Route::post('/lock', [IssueController::class, 'switchStatus'])->name('lock');
         });
     });
 });

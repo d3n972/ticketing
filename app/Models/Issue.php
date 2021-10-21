@@ -9,6 +9,9 @@ class Issue extends Model
 {
     use HasFactory;
     protected $fillable=['*'];
+    const STATUS_LOCKED=1;
+    const STATUS_OPEN=0;
+    const STATUS_CREATED=-1;
 
 
     public function assignee()

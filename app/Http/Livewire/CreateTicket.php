@@ -47,13 +47,18 @@ class CreateTicket extends Component
 
     }
 
-    public function render()
+    public function render(Request $r)
     {
+       if(!$r->user()->tokenCan('site:read-write')){
+            return 404;
+       }
         $sevs=Severity::all();
         $teams=Team::all();
         return view('livewire.create-ticket',[
             "severities"=>$sevs,
-            "teams"=>$teams
+            "teams"=>$teams,
+            "u"=>$r->user()
         ]);
+
     }
 }
