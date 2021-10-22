@@ -12,6 +12,7 @@
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "livewire-ui/modal": "^1.0",
         "livewire/livewire": "^2.5",
         "mediconesystems/livewire-datatables": "^0.6.8"
     },

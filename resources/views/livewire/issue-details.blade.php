@@ -40,7 +40,7 @@
                             {{ __('Assignee') }}
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ \App\Models\User::find($issue->assignee)->get()[0]->name }}
+                            {{ \App\Models\User::where('id','=',$issue->assignee)->get()[0]->name }}
                         </dd>
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -128,7 +128,7 @@
             </div>
             <div class="grid grid-flow-row gap-3">
                 <button wire:click="dd({{$this->issue}})" class="bg-red-200 rounded">3</button>
-                <button data-toggle="modal" data-target="#exampleModal" class="bg-red-200 rounded">3</button>
+                <button wire:click="$emit('openModal', 'assign-task',{{json_encode(['issue'=>$issue])}})" class="bg-red-200 rounded">3</button>
                 <button class="bg-red-200 rounded">3</button>
                 <button class="bg-red-200 rounded">3</button>
                 <button class="bg-red-200 rounded">3</button>
@@ -138,34 +138,5 @@
         </div>
 
     </div>
-    <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true close-btn">×</span>
-                    </button>
-                </div>
-               <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Name</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" wire:model="name">
-                            @error('name') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput2">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput2" wire:model="email" placeholder="Enter Email">
-                            @error('email') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
-                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @livewire('livewire-ui-modal')
 </div>

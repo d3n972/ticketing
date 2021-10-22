@@ -41,6 +41,12 @@ class IssuesTable extends LivewireDatatable
                 ->searchable()
                 ->hideable()
                 ->filterable(),
+                Column::name('assignee.name')
+                ->defaultSort('asc')
+                ->searchable()
+                ->hideable()
+                ->filterable()
+                ->label('Assignee'),
             Column::name('project.name')
                 ->defaultSort('asc')
                 ->searchable()
