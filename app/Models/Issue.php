@@ -25,4 +25,7 @@ class Issue extends Model
     public function severity(){
         return $this->hasOne(Severity::class,'id','severity')->latest();
     }
+    public function project(){
+        return $this->hasOne(Team::class,'id','project')->latest();
+    }
 }
