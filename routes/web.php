@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('/', [IssueController::class, 'index'])->name('list');
             Route::get('/new', [IssueController::class, 'new'])->name('create');
             Route::post('/modify', [IssueController::class, 'modify_ticket'])->name('modify');
+            Route::get('/view/{id}', [IssueController::class, 'details'])->name('details');
             Route::post('/assign',[IssueController::class, 'assign_ticket'])->name('assign');
             Route::post('/lock', [IssueController::class, 'switchStatus'])->name('lock');
         });

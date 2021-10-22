@@ -9,8 +9,8 @@
     </x-slot>
 
 
-    <div class="container grid grid-cols-1 mx-auto">
-        <div class="mx-auto ">
+    <div class="container grid grid-col mx-auto mt-2">
+        <div class="mx-auto w-8/12">
             @if (session()->has('message'))
                 <div
                     class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3"
@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <livewire:issues-table />
+            @livewire('issue-details',['iid'=>$issue->id])
         </div>
     </div>
     @push('endscripts')

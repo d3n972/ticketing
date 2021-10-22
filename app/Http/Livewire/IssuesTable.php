@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use \App\Models\Issue;
 use App\Models\User;
 use App\Models\JSONResponse;
+use App\Models\Severity;
 use Exception;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\NumberColumn;
@@ -67,17 +68,64 @@ class IssuesTable extends LivewireDatatable
             })
                 ->searchable()
                 ->hideable()
-                ->filterable(),
+                ->filterable()
+                ->label('Status'),
             Column::callback(['id'], function ($id) {
                 return view('issues.actions', ['id' => $id]);
             })->unsortable()
         ];
     }
 
+    public function rowClasses($row, $loop)
+    {
+
+        $c = Severity::where('name', '=', $row->{'severity.name'})->get()[0];
+        $colClass = "text-gray-900 ";
+        switch ($c->id) {
+            case 1:
+                $colClass = "text-white bg-gray-500";
+                break;
+            case 4:
+                $colClass = "text-black bg-yellow-500";
+                break;
+            case 5:
+            case 6:
+                $colClass = "bg-red-500 text-white";
+                break;
+            default:
+                # code...
+                break;
+        }
+
+
+        return 'divide-x divide-gray-100 text-sm ' . $colClass;
+    }
+    public function cellClasses($row, $column)
+    {
+        $c = Severity::where('name', '=', $row->{'severity.name'})->get()[0];
+        $colClass = "text-gray-900 ";
+        switch ($c->id) {
+            case 1:
+                $colClass = "text-white bg-gray-500";
+                break;
+            case 4:
+                $colClass = "text-black bg-yellow-500";
+                break;
+            case 5:
+            case 6:
+                $colClass = "bg-red-500 text-white";
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        return 'divide-x divide-gray-100 text-sm ' . $colClass;
+    }
     public function details($id)
     {
-        session()->flash('message', __('Ticket has been closed.'));
-        return view('welcome');
+
+      return (view('issue.view',['iid'=>$id]));
     }
     public function assign($id)
     {

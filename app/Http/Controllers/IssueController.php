@@ -19,18 +19,10 @@ class IssueController extends Controller
         ]);
     }
 
-    public function api_ListIssues()
-    {
-        $o = [];
-        foreach (Issue::with('author', 'assignee', 'severity')->get() as $i) {
-            $l = $i;
-            $l->author();
-            $l->severityNumeric = $l->severity;
-            //  $l->severity = $i->getSeverity();
-            array_push($o, $l);
-        }
-        return response()->json($o);
+    public function details($id){
+         return view('issues.view',['issue'=>( Issue::with('author', 'assignee', 'severity')->find($id)->get()[0])]);
     }
+
     public function new()
     {
 
