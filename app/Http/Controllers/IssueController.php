@@ -12,20 +12,16 @@ class IssueController extends Controller
 {
     public function index(Request $request)
     {
-        $uid = $request->user()->id;
-        $tok = $request->user()->createToken('usertoken', ['site:read-write'])->plainTextToken;
-        return view('issues.list', [
-            'token' => $tok
-        ]);
+        return view('issues.list');
     }
 
-    public function details($id){
-         return view('issues.view',['issue'=>( Issue::with('author', 'assignee', 'severity')->find($id)->get()[0])]);
+    public function details($id)
+    {
+        return view('issues.view', ['issue' => (Issue::with('author', 'assignee', 'severity')->where('id', '=', $id)->get()[0])]);
     }
 
     public function new()
     {
-
         return view('issues.create');
     }
     public function switchStatus(Request $r)
@@ -33,13 +29,12 @@ class IssueController extends Controller
         $id = $r->input('id');
         $m = Issue::find($id)->take(1)->get()[0];
 
-        $m->status=Issue::STATUS_LOCKED;
-        if($m->save()){
+        $m->status = Issue::STATUS_LOCKED;
+        if ($m->save()) {
             session()->flash('message', __('Ticket has been closed.'));
-            return response()->json(new JSONResponse(false,__('Ticket closed')));
-        }else{
-            return response()->json(new JSONResponse(false,__('An error occured')));
+            return response()->json(new JSONResponse(false, __('Ticket closed')));
+        } else {
+            return response()->json(new JSONResponse(false, __('An error occured')));
         }
-
     }
 }

@@ -6,6 +6,7 @@ use App\Events\IssueFiled;
 use App\Models\Issue;
 use App\Models\Severity;
 use App\Models\Team;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
@@ -17,13 +18,14 @@ class CreateTicket extends Component
     public $severity;
     public $project;
     public $description;
-
+    public $due_at;
 
     public $rules=[
         'owner'=>'max:20',
         'title'=>'required|max:255',
         'severity'=>'max:20',
         'project'=>'max:20',
+        'due_at'=>'required',
         'description'=>'required|max:65565'
     ];
     public function submit(Request $r) {
@@ -37,6 +39,7 @@ class CreateTicket extends Component
         $i->severity=$validatedData['severity']??1;
         $i->project=$validatedData['project']??1;
         $i->content=$validatedData['description'];
+        $i->due_at=$validatedData['due_at'];
         $i->assignee = 1;
         if($i->save()){
             //IssueFiled::dispatch($i);
@@ -57,7 +60,8 @@ class CreateTicket extends Component
         return view('livewire.create-ticket',[
             "severities"=>$sevs,
             "teams"=>$teams,
-            "u"=>$r->user()
+            "u"=>$r->user(),
+            "mindate"=>Carbon::now()->nextWeekday()->format('Y-m-d')
         ]);
 
     }

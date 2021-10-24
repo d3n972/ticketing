@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            @livewire('issue-details',['iid'=>$issue->id])
+            @livewire('issue-details',['iid'=>($issue->id)])
         </div>
     </div>
     @push('endscripts')

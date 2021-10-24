@@ -25,7 +25,7 @@ class IssuesTable extends LivewireDatatable
                 ->label('ID')
                 ->searchable()
                 ->filterable()
-                ->linkTo('#', 6),
+                ->linkTo("issue",6),
             Column::name('title')
                 ->defaultSort('asc')
                 ->searchable()
