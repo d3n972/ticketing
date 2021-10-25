@@ -135,7 +135,7 @@ class IssuesTable extends LivewireDatatable
     }
     public function assign($id)
     {
-        return view('welcome');
+        return new AssignTask();
     }
     public function lock_unlock($id)
     {
