@@ -21,11 +21,14 @@ class CreateTeamsTable extends Migration
             $table->boolean('personal_team');
             $table->timestamps();
         });
-        $t=new Team();
-        $t->user_id=1;
-        $t->name='System';
-        $t->personal_team=true;
-        $t->save();
+
+        foreach (['System','Default'] as $T) {
+            $t=new Team();
+            $t->user_id=1;
+            $t->name=$T;
+            $t->personal_team=true;
+            $t->save();
+        }
     }
 
     /**
