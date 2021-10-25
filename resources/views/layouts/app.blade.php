@@ -49,5 +49,6 @@
         @livewireScripts
 
         @stack('endscripts')
+        @livewire('livewire-ui-modal')
     </body>
 </html>
