@@ -49,7 +49,7 @@
                                 disabled
                             >{{ __('Please select') }}</option>
                             @foreach ($severities as $sev)
-                                <option value="{{ $sev->id }}">{{ __($sev->name) }}</option>
+                                <option value="{{ $sev->id }}" class="{{$sev->getCSSStyling()}}">{{ __($sev->name) }}</option>
                             @endforeach
                         </select>
                     </label>
