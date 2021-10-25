@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Events\IssueFiled;
+use App\Models\Attachment;
 use App\Models\Issue;
 use App\Models\Severity;
 use App\Models\Team;
@@ -10,15 +11,20 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
+use Livewire\WithFileUploads;
+use function Ramsey\Uuid\v4;
 
 class CreateTicket extends Component
 {
+    use WithFileUploads;
+
     public $owner;
     public $title;
     public $severity;
     public $project;
     public $description;
     public $due_at;
+    public $attachments=[];
 
     public $rules=[
         'owner'=>'max:20',
@@ -26,13 +32,16 @@ class CreateTicket extends Component
         'severity'=>'max:20',
         'project'=>'max:20',
         'due_at'=>'date',
-        'description'=>'required|max:65565'
+        'description'=>'required|max:65565',
+        'attachments.*' => 'max:10240', // 1MB Max
+
     ];
     public function submit(Request $r) {
         if($this->due_at==null){
           $this->due_at=Carbon::now();
         }
         $validatedData = $this->validate();
+
 
         $validatedData['author']=$r->user()->id;
         $i=new Issue();
@@ -45,6 +54,20 @@ class CreateTicket extends Component
         $i->assignee = 1;
         if($i->saveOrFail()){
             //IssueFiled::dispatch($i);
+            foreach ($validatedData['attachments'] as $attachment) {
+              $fn=v4();
+              $fnparts=explode('.',$attachment);
+              $ext=array_pop($fnparts);
+              $f= $attachment->storeAs('attachments',$fn);
+              $a=new Attachment();
+              $a->issue=$i->id;
+
+              $a->size=$attachment->getSize();
+              $a->filename=$fn;
+              $a->original_name=$attachment->getClientOriginalName();
+              $a->created_by=$r->user()->id;
+              $a->save();
+            }
             Mail::to($r->user())->send((new \App\Mail\IssueFiled($i))->build());
         }
 

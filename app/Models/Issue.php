@@ -73,4 +73,7 @@ class Issue extends Model
     {
         return $this->hasOne(Team::class, 'id', 'project')->latest();
     }
+    public function attachments(){
+      return $this->hasMany(Attachment::class,'issue')->latest()->get();
+    }
 }
