@@ -25,11 +25,13 @@ class CreateTicket extends Component
         'title'=>'required|max:255',
         'severity'=>'max:20',
         'project'=>'max:20',
-        'due_at'=>'required',
+        'due_at'=>'date',
         'description'=>'required|max:65565'
     ];
     public function submit(Request $r) {
-
+        if($this->due_at==null){
+          $this->due_at=Carbon::now();
+        }
         $validatedData = $this->validate();
 
         $validatedData['author']=$r->user()->id;
@@ -41,12 +43,12 @@ class CreateTicket extends Component
         $i->content=$validatedData['description'];
         $i->due_at=$validatedData['due_at'];
         $i->assignee = 1;
-        if($i->save()){
+        if($i->saveOrFail()){
             //IssueFiled::dispatch($i);
             Mail::to($r->user())->send((new \App\Mail\IssueFiled($i))->build());
         }
 
-        session()->flash('message', 'Post successfully updated.');
+        session()->flash('message', __('Ticket has been created: ').$i->id);
 
     }
 
