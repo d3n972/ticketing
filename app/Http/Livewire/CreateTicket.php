@@ -54,6 +54,7 @@ class CreateTicket extends Component
         $i->assignee = 1;
         if($i->saveOrFail()){
             //IssueFiled::dispatch($i);
+          if(isset($validatedData['attachments'])){
             foreach ($validatedData['attachments'] as $attachment) {
               $fn=v4();
               $fnparts=explode('.',$attachment);
@@ -68,6 +69,7 @@ class CreateTicket extends Component
               $a->created_by=$r->user()->id;
               $a->save();
             }
+          }
             Mail::to($r->user())->send((new \App\Mail\IssueFiled($i))->build());
         }
 
