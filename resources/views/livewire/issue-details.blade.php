@@ -47,7 +47,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                             {{ __('Due date') }}
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <dd class="mt-1 text-sm {{$dateColor}} sm:mt-0 sm:col-span-2">
                             {{ $issue->due_at }}
                         </dd>
                     </div>
@@ -137,7 +137,7 @@
             </div>
             <div class="grid grid-flow-row gap-3 p-3">
                 <button wire:click="$emit('openModal', 'assign-task',{{json_encode(['issue'=>$issue])}})" class="bg-blue-200 rounded">{{__('Assign task')}}</button>
-                <button class="bg-blue-200 rounded">{{__('Set priority')}}</button>
+                <button wire:click="$emit('openModal', 'change-priority',{{json_encode(['issue'=>$issue])}})" class="bg-blue-200 rounded">{{__('Set priority')}}</button>
                 <button class="bg-red-700 text-white rounded">{{__('Close task')}}</button>
             </div>
         </div>
