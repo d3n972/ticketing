@@ -37,13 +37,13 @@ class Issue extends Model
                         $model->due_at = Carbon::now()->addWeekdays(30);
                     }
                     break;
-                case 4/*Major*/:
+                case 4/*Major*/ :
                     $model->due_at = Carbon::now()->addWeekdays(14);
                     break;
-                case 5/*Severe*/:
+                case 5/*Severe*/ :
                     $model->due_at = Carbon::now()->addWeekdays(5)->setHour(8);
                     break;
-                case 6/*Critical*/:
+                case 6/*Critical*/ :
                     $model->due_at = Carbon::now()->nextWeekday()->setHour(8);
                     break;
                 default:
@@ -53,32 +53,37 @@ class Issue extends Model
             $model->ticket_id=TicketId::where('id',$model->project()->get()[0]->id)->get()[0]->getNext();
         });
 
+    }
 
         static::updated(function ($model) {
 
-        });
-    }
     public function assignee()
     {
         return $this->hasOne(User::class, 'id', 'assignee')->latest();
     }
+
     public function author()
     {
         return $this->hasOne(User::class, 'id', 'author')->latest();
     }
+
     public function severity()
     {
         return $this->hasOne(Severity::class, 'id', 'severity')->latest();
     }
+
     public function project()
     {
         return $this->hasOne(Team::class, 'id', 'project')->latest();
     }
-    public function attachments(){
-      return $this->hasMany(Attachment::class,'issue')->latest()->get();
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'issue')->latest()->get();
     }
 
-    public function isWorkInProgress(){
-      return false;
+    public function isWorkInProgress()
+    {
+        return false;
     }
 }

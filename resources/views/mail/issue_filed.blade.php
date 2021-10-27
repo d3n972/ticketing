@@ -1,63 +1,66 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="color-scheme" content="light">
-<meta name="supported-color-schemes" content="light">
-<style>
-@media only screen and (max-width: 600px) {
-.inner-body {
-width: 100% !important;
-}
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+    <style>
+        @media only screen and (max-width: 600px) {
+            .inner-body {
+                width: 100% !important;
+            }
 
-.footer {
-width: 100% !important;
-}
-}
+            .footer {
+                width: 100% !important;
+            }
+        }
 
-@media only screen and (max-width: 500px) {
-.button {
-width: 100% !important;
-}
-}
-</style>
+        @media only screen and (max-width: 500px) {
+            .button {
+                width: 100% !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-<tr>
-<td align="center">
-<table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+        <td align="center">
+            <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 
-<!-- Email Body -->
-<tr>
-<td class="body" width="100%" cellpadding="0" cellspacing="0">
-<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
-<!-- Body content -->
-<tr>
-<td class="content-cell">
+                <!-- Email Body -->
+                <tr>
+                    <td class="body" width="100%" cellpadding="0" cellspacing="0">
+                        <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0"
+                               role="presentation">
+                            <!-- Body content -->
+                            <tr>
+                                <td class="content-cell">
 
-<h3>{{__('Dear')}} $NAME$</h3>
+                                    <h3>{{__('Dear')}} $NAME$</h3>
 
-<p>{{__('Your issue was filed under ')}} {{$issue->project}}/{{$issue->id}}</p>
+                                    <p>{{__('Your issue was filed under ')}} {{$issue->project}}/{{$issue->id}}</p>
 
-@if($issue->severity>4)
-<strong>{{__('We will start processing your issue 1 working day.')}}</strong>
-@else
-<p>{{__('We will start processing your issue in 7 working days.')}}</p>
-@endif
+                                    @if($issue->severity>4)
+                                        <strong>{{__('We will start processing your issue 1 working day.')}}</strong>
+                                    @else
+                                        <p>{{__('We will start processing your issue in 7 working days.')}}</p>
+                                    @endif
 
-Best regards,
-<italic>{{__('name')}}</italic>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-</td>
-</tr>
+                                    Best regards,
+                                    <italic>{{__('name')}}</italic>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

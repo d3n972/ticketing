@@ -21,7 +21,6 @@ class Client extends Model{
      */
     $sysuser = User::where('id', 1)->first();
     if($this->user()->teams()->count() == 0){
-      $tm = new AddTeamMember();
       $t = $sysuser->ownedTeams()->create([
         'name' => $this->name,
         'personal_team' => false,
