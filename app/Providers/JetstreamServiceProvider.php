@@ -56,6 +56,7 @@ class JetstreamServiceProvider extends ServiceProvider
             'read',
             'update',
             'delete',
+          'addTeamMember'
         ])->description('Administrator users can perform any action.');
 
         Jetstream::role('editor', 'Editor', [
@@ -63,5 +64,10 @@ class JetstreamServiceProvider extends ServiceProvider
             'create',
             'update',
         ])->description('Editor users have the ability to read, create, and update.');
+      Jetstream::role('client_admin', 'Client admin', [
+        'read',
+        'create',
+        'update',
+      ])->description('Client admins can view, create and update tickets belonging to them.');
     }
 }
