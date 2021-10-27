@@ -50,6 +50,7 @@ class Issue extends Model
                     //don't touch the due date
                     break;
             }
+            $model->ticket_id=TicketId::where('id',$model->project()->get()[0]->id)->get()[0]->getNext();
         });
 
 
@@ -75,5 +76,9 @@ class Issue extends Model
     }
     public function attachments(){
       return $this->hasMany(Attachment::class,'issue')->latest()->get();
+    }
+
+    public function isWorkInProgress(){
+      return false;
     }
 }

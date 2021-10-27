@@ -23,7 +23,7 @@ class AssignTask extends ModalComponent
         if(!$this->issue->save()){
             throw new Error("FAIL");
         }
-      session()->flash('message', __('Ticket has been assigned to').' '.User::where('id','=', $this->issue->assignee)->get()[0]->name);
+      session()->flash('message', __('Ticket has been assigned to').' '.User::where('id','=', $this->issue->assignee)->first()->name);
     }
     public function mount(\App\Models\Issue $issue)
     {

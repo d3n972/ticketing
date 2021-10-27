@@ -21,7 +21,7 @@ class Comment extends Model
       return $this->reply_to!=null;
     }
     public function getParent(){
-      return Comment::where('id','=',$this->reply_to)->get()[0];
+      return Comment::where('id','=',$this->reply_to)->first();
     }
 
   /**

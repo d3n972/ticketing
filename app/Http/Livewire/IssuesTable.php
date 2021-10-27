@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use \App\Models\Issue;
+use App\Models\Team;
 use App\Models\User;
 use App\Models\JSONResponse;
 use App\Models\Severity;
@@ -93,7 +95,7 @@ class IssuesTable extends LivewireDatatable
     public function rowClasses($row, $loop)
     {
 
-        $c = Severity::where('name', '=', $row->{'severity.name'})->get()[0];
+        $c = Severity::where('name', '=', $row->{'severity.name'})->first();
         $colClass = "text-gray-900 ";
         switch ($c->id) {
             case 1:
@@ -116,7 +118,7 @@ class IssuesTable extends LivewireDatatable
     }
     public function cellClasses($row, $column)
     {
-        $c = Severity::where('name', '=', $row->{'severity.name'})->get()[0];
+        $c = Severity::where('name', '=', $row->{'severity.name'})->first();
         $colClass = "text-gray-900 ";
         switch ($c->id) {
             case 1:
@@ -148,7 +150,7 @@ class IssuesTable extends LivewireDatatable
     public function lock_unlock($id)
     {
 
-        $m = Issue::where('id', '=', $id)->get()[0];
+        $m = Issue::where('id', '=', $id)->first();
 
         if ($m->status) {
             $m->status = Issue::STATUS_OPEN;

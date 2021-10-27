@@ -13,7 +13,7 @@ class IssueDetails extends Component
    */
     public $issue;
     public function mount($iid){
-        $this->issue=\App\Models\Issue::with('author', 'assignee', 'severity')->where('id','=',$iid)->get()[0];
+        $this->issue=\App\Models\Issue::with('author', 'assignee', 'severity')->where('id','=',$iid)->first();
     }
     public function render()
     {

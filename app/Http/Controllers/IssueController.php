@@ -17,7 +17,7 @@ class IssueController extends Controller
 
     public function details($id)
     {
-        return view('issues.view', ['issue' => (Issue::with('author', 'assignee', 'severity')->where('id', '=', $id)->get()[0])]);
+        return view('issues.view', ['issue' => (Issue::with('author', 'assignee', 'severity')->where('id', '=', $id)->first())]);
     }
 
     public function new()
@@ -27,7 +27,7 @@ class IssueController extends Controller
     public function switchStatus(Request $r)
     {
         $id = $r->input('id');
-        $m = Issue::find($id)->take(1)->get()[0];
+        $m = Issue::find($id)->first();
 
         $m->status = Issue::STATUS_LOCKED;
         if ($m->save()) {
