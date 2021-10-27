@@ -58,4 +58,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function areSystemMember(){
+        return $this->belongsToTeam(Team::where('id',1)->first());
+    }
+    public function getCreatorDisclaimer(){
+        if($this->areSystemMember()){
+            return sprintf("*ticket was created by %s *\n\n",$this->name);
+        }
+    }
 }

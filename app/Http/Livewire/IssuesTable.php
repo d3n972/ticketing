@@ -79,6 +79,9 @@ class IssuesTable extends LivewireDatatable
                     case Issue::STATUS_LOCKED:
                         $r = "CLOSED";
                         break;
+                    default:
+                        throw new \ErrorException('Unknown issue status');
+                        break;
                 }
                 return $r;
             })

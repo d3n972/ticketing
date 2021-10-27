@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Issue extends Model
 {
     use HasFactory;
+
     protected $fillable = ['*'];
     const STATUS_LOCKED = 1;
     const STATUS_OPEN = 0;
@@ -50,12 +51,25 @@ class Issue extends Model
                     //don't touch the due date
                     break;
             }
-            $model->ticket_id=TicketId::where('id',$model->project()->get()[0]->id)->get()[0]->getNext();
+            $ticketIdInstance = $model->getTicketIdModel();
+            $model->ticket_id = $ticketIdInstance->getNext();
         });
 
     }
 
-        static::updated(function ($model) {
+    public function getTicketIdModel()
+    {
+        $ticketIdInstance = TicketId::where('project', '=', $this->project()->first()->id)->first();
+        if ($ticketIdInstance == null) {
+            $tid = new TicketId();
+            $tid->project = $this->project()->first()->id;
+            $tid->pattern = "T-######";
+            $tid->current = 1;
+            $tid->save();
+            $ticketIdInstance = $this->getTicketIdModel();
+        }
+        return $ticketIdInstance;
+    }
 
     public function assignee()
     {
