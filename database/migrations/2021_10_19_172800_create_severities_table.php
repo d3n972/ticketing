@@ -22,7 +22,14 @@ class CreateSeveritiesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::table('issues', function (Blueprint $table) {
 
+            $table->foreignId('author')->constrained('users','id')->default(1);
+            $table->foreignId('assignee')->constrained('users','id')->default(1);
+            $table->foreignId('project')->constrained('teams');
+            $table->foreignId('severity')->constrained()->default(1);
+
+        });
         $levels=['No impact / Informational', 'Low', 'Minor','Major', 'Severe','Critical'];
         foreach ($levels as $sev) {
             $s=new Severity();
