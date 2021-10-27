@@ -13,11 +13,19 @@ use Mediconesystems\LivewireDatatables\Column;
 
 class IssuesTable extends LivewireDatatable
 {
+    public $teamsFilter=[];
     public function builder()
     {
         return Issue::with('author', 'assignee', 'severity');
     }
+    public function getFilteredTeams(){
+     $teams=Auth::user()->allTeams()->all();
 
+     array_map(function($e){
+       array_push($this->teamsFilter,$e->name);
+     },$teams);
+     return $this->teamsFilter;
+    }
     public function columns()
     {
         return [
@@ -51,7 +59,7 @@ class IssuesTable extends LivewireDatatable
                 ->defaultSort('asc')
                 ->searchable()
                 ->hideable()
-                ->filterable(),
+                ->filterable($this->getFilteredTeams()),
             Column::name('severity.name')
                 ->defaultSort('asc')
                 ->searchable()
