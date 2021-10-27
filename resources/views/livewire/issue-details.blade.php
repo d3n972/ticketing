@@ -7,7 +7,7 @@
     @endpush
     <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{ __('Ticket')}} {{ \App\Models\Team::where('id','=',$issue->project)->get()[0]->name }}/{{$issue->id}}
+            {{ __('Ticket')}} {{ \App\Models\Team::where('id','=',$issue->project)->first()->name }}/{{$issue->id}}
         </h3>
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
             {{-- Personal details and application. --}}
@@ -30,8 +30,8 @@
                             {{ __('Author') }}
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ \App\Models\User::where('id','=',$issue->author)->get()[0]->name }}
-                            ({{ \App\Models\User::where('id','=',$issue->author)->get()[0]->email }})
+                            {{ \App\Models\User::where('id','=',$issue->author)->first()->name }}
+                            ({{ \App\Models\User::where('id','=',$issue->author)->first()->email }})
                         </dd>
                     </div>
 
@@ -40,7 +40,7 @@
                             {{ __('Assignee') }}
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ \App\Models\User::where('id','=',$issue->assignee)->get()[0]->name }}
+                            {{ \App\Models\User::where('id','=',$issue->assignee)->first()->name }}
                         </dd>
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
