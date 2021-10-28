@@ -115,4 +115,8 @@ class Issue extends Model
     public function getComments(){
         return Comment::where('issue',$this->id)->get()->all();
     }
+    public function getTimeHuman($time,$format='Y. m. d. H:i'){
+        $i=Carbon::parse($time);
+        return $i->format($format);
+    }
 }

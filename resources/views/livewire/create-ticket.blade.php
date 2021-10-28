@@ -6,7 +6,7 @@
                 window.editor.render();
                 window.editor.codemirror.on('change', (e) => {
                     console.dirxml(e)
-                    @this.set('description', window.editor.codemirror.getValue());
+                @this.set('description', window.editor.codemirror.getValue());
                 });
 
             })
@@ -29,7 +29,7 @@
                             name="title"
                             type="text"
                             required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="mt-1 block  bg-gray-900 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             placeholder="{{ __('Title') }}"
                         >
                     </label>
@@ -41,7 +41,7 @@
                             wire:model="severity"
                             id="sev"
                             name="sev"
-                            class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class=" block  bg-gray-900 w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
                             <option
                                 selected
@@ -49,7 +49,8 @@
                                 disabled
                             >{{ __('Please select') }}</option>
                             @foreach ($severities as $sev)
-                                <option value="{{ $sev->id }}" class="{{$sev->getCSSStyling()}}">{{ __($sev->name) }}</option>
+                                <option value="{{ $sev->id }}"
+                                        class="{{$sev->getCSSStyling()}}">{{ __($sev->name) }}</option>
                             @endforeach
                         </select>
                     </label>
@@ -59,7 +60,7 @@
                             wire:model="project"
                             id="project"
                             name="project"
-                            class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class=" block bg-gray-900 w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
                             <option
                                 selected
@@ -80,7 +81,7 @@
                             wire:model="due_at"
                             wire:bind="due_at"
                             min="{{$mindate}}"
-                            class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class=" block  bg-gray-900 w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
                     </label>
                 </div>
@@ -90,26 +91,28 @@
                             <span class="text-gray-700">{{ __('Attachments') }}</span>
 
                             <input
-                                    wire:model="attachments"
-                                    name="attachments"
-                                    type="file"
-                                    multiple
-                                    id="attachments"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    placeholder="{{ __('Title') }}"
+                                wire:model="attachments"
+                                name="attachments"
+                                type="file"
+                                multiple
+                                id="attachments"
+                                class="mt-1 text-white block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                placeholder="{{ __('Title') }}"
                             >
                         </label>
                     </div>
-                <label
-                    class="block"
-                    wire:ignore
-                >
-                    <span class="text-gray-700">{{ __('Description') }}</span>
+                    <label
+                        class="block"
+                        wire:ignore
+                    >
+                        <span class="text-gray-700">{{ __('Description') }}</span>
+                        <div class=" border border-gray-500 rounded">
                     <textarea
                         wire:model="description"
                         name="g"
                         class="
                     mt-1
+
                     block
                     w-full
                     rounded-md
@@ -119,12 +122,13 @@
                   "
                         rows="3"
                     ></textarea>
-                </label>
-                <button
-                    type="submit"
-                    class="bg-blue-500 duration-300 hover:bg-blue-600 mx-auto px-4 py-2 rounded-lg text-blue-100 w-3/12"
-                > {{ __('send') }} </button>
+                        </div>
+                    </label>
+                    <button
+                        type="submit"
+                        class="bg-blue-500 duration-300 hover:bg-blue-600 mx-auto px-4 py-2 rounded-lg text-blue-100 w-3/12"
+                    > {{ __('send') }} </button>
+                </div>
             </div>
-        </div>
     </form>
 </div>

@@ -4,4 +4,19 @@
 [x-cloak] {
     display: none;
 }
+.divide-fields>span{
+    flex-basis: 7%;
+}
+.divide-fields>span::before{
+    content: "";
+    display: inline-block;
+    height: 1em;
+    vertical-align: -0.1em;
+    margin-right: 8px;
+    @apply border border-gray-800;
+}
+.divide-fields>span:first-child::before {
+    border-left-color: transparent;
+    display: none;
+}
 
