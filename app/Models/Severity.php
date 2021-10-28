@@ -29,4 +29,7 @@ class Severity extends Model{
     }
     return $colClass;
   }
+  public function getCss(){
+      return $this->css_classes;
+  }
 }
