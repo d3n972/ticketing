@@ -23,16 +23,16 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
         @stack('scripts')
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased min-h-screen bg-gray-900 text-white">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-900">
+        <div class="">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-gray-900 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="bg-gray-800 shadow">
+                    <div class="max-w-7xl mx-auto py-6">
                         {{ $header }}
                     </div>
                 </header>
@@ -42,6 +42,16 @@
             <main>
                 {{ $slot }}
             </main>
+        </div>
+        <div class="border-gray-400 border-t-2 p-5 m-3">
+            <div class="grid grid-cols-3 grid-flow-row justify-items-center">
+                <div class="grid grid-rows-2 grid-flow-col">
+                    <div>{{env('APP_NAME')}}</div>
+                    <p>{{env('APP_URL')}}</p>
+                </div>
+                <div>asd</div>
+                <div>asd</div>
+            </div>
         </div>
 
         @stack('modals')

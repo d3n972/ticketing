@@ -68,6 +68,7 @@ class CreateTicket extends Component
             if (isset($validatedData['attachments'])) {
                 foreach ($validatedData['attachments'] as $attachment) {
                     $fn = v4();
+                    $attachment->storeAs('attachments', $fn);
                     $a = new Attachment();
                     $a->issue = $i->id;
                     $a->size = $attachment->getSize();

@@ -7,7 +7,7 @@
     </x-slot>
 
 
-    <div class="container grid grid-col mx-auto mt-2">
+    <div class="grid grid-col mt-2">
         <div class="mx-auto w-8/12">
             @if (session()->has('message'))
                 <div
