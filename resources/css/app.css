@@ -20,3 +20,6 @@
     display: none;
 }
 
+.label-anim-remove{
+    animation: pulse 0.25s cubic-bezier(0.4, 0, 0.6, 1);
+}
