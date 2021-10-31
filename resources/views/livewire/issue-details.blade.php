@@ -126,11 +126,16 @@
                 </svg>
             </button>
         </div>
-
-        <h1 class="font-medium text-3xl">
-            {{ $issue->title }}
-        </h1>
-
+        <div class="flex gap-3">
+            <h1 class="font-medium text-3xl">
+                {{ $issue->title }}
+            </h1>
+            <button
+                wire:click="$emit('openModal', 'ticket-editor',{{ json_encode(['issue' => $issue]) }})"
+                class="text-purple-500 bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                type="button"
+            >[edit]</button>
+        </div>
     </div>
     <div class="grid grid-cols-3 gap-5">
         <div class="col-span-2">

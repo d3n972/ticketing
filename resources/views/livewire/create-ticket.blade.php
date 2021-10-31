@@ -72,7 +72,7 @@
                             @endforeach
                         </select>
                     </label>
-                    <label class="blokc">
+                    <label class="block">
                         <span class="text-gray-700">{{ __('Due date') }}</span>
                         <input
                             type="date"

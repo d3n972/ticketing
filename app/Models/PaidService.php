@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Hidehalo\Nanoid\Client;
 use Hidehalo\Nanoid\GeneratorInterface;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property App\Models\User author
@@ -20,7 +21,7 @@ use Hidehalo\Nanoid\GeneratorInterface;
 class PaidService extends Model
 {
     use HasFactory;
-    use softDeletes;
+    use SoftDeletes;
     private $_nanoid_alphabet='123456789ABCDEFGHJKLMNPRSTUVWXYZabcdefghjklmnprstuvwxyz';
     private $_nanoid_length=21;
 
@@ -28,7 +29,7 @@ class PaidService extends Model
         0=>'PROPOSED',
         1=>'ACCEPTED',
         2=>'REJECTED'
-    ]
+    ];
 
     public function accpetProposal(){
         $this->status=1;
@@ -42,6 +43,6 @@ class PaidService extends Model
 
     public function genPublicId(){
         $client = new Client();
-        return $client->formattedId($alphabet = $this->_nanoid_alphabet, $size = $this->_nanoid_length);
+        return $client->formattedId($this->_nanoid_alphabet,$this->_nanoid_length);
     }
 }
