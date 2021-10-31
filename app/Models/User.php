@@ -59,6 +59,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    protected function defaultProfilePhotoUrl()
+    {
+        return 'https://eu.ui-avatars.com/api/?name='.urlencode($this->name).'&color=00edae&background=111827&bold=true&format=svg&length=2&size=256';
+    }
+
     public function areSystemMember(){
         return $this->belongsToTeam(Team::where('id',1)->first());
     }
