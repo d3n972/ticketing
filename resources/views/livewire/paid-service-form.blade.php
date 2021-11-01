@@ -1,4 +1,5 @@
 <div class="grid p-5 bg-gray-800">
+    @include('components.sess_flash')
     <div >
       <h3 class="font-semibold text-xl text-white leading-tight text-center">Proposal for payment</h3>
       <div class="gap-3 flex flex-row">
