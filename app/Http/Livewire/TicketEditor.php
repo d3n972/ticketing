@@ -43,7 +43,7 @@ class TicketEditor extends ModalComponent
             $ps->client_assignee=$m->author;
             $ps->public_id=$ps->genPublicId();
             $ps->save();
-            dd($ps);
+            session()->flash('message','Ticket saved!');
        }
     }
 }

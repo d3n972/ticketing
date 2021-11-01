@@ -21,8 +21,8 @@ class PaymentRequest extends Model
         $this->ppModel->FundingSources = array(FundingSourceType::All);
         $this->ppModel->Locale = UILocale::EN;
         $this->ppModel->Currency = Currency::HUF;
-        $this->ppModel->RedirectUrl = "http://webshop.example.com/afterpayment";
-        $this->ppModel->CallbackUrl = "http://webshop.example.com/processpayment";
+        $this->ppModel->RedirectUrl = route('payment.after');
+        $this->ppModel->CallbackUrl = route('payment.process');
     }
 
     public function addTransaction(Transaction $t)

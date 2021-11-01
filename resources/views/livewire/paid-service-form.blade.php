@@ -3,11 +3,11 @@
       <h3 class="font-semibold text-xl text-white leading-tight text-center">Proposal for payment</h3>
       <div class="gap-3 flex flex-row">
           <div>Ticket id:</div>
-          <pre>$TTT$</pre>
+          <pre>{{$ps->issue()->ticket_id}}</pre>
       </div>
       <div class="gap-3 flex flex-row">
           <div>Amount</div>
-          <div>$FFFF$ Ft</div>
+          <div>{{$ps->price}} Ft</div>
       </div>
       <div>
           <span>Description:</span>

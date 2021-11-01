@@ -13,6 +13,7 @@ use FundingSourceType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use ItemModel;
+use PaymentStateResponseModel;
 use PaymentTransactionModel;
 use PaymentType;
 use PreparePaymentRequestModel;
@@ -31,7 +32,7 @@ class Payment extends Model
     //----------------------------------------------//
     private $items = [];
     private Transaction $trans;
-    private PreparePaymentRequestModel  $pr;
+    private PreparePaymentRequestModel $pr;
 
     public function __construct(array $attributes = [])
     {
@@ -59,14 +60,10 @@ class Payment extends Model
 
     public function newTransaction()
     {
-        $t = new Transaction();
-        foreach ($this->items as $i) {
-            $t->addItem($i);
-        }
-        return $t;
+        return new Transaction();
     }
 
-    public function addPaymentRequest( $pr)
+    public function addPaymentRequest($pr)
     {
         $this->pr = $pr;
     }
@@ -80,10 +77,12 @@ class Payment extends Model
     {
 
         $myPayment = $this->client->PreparePayment($this->pr);
-        return "https://secure.barion.com/Pay?id=" . $myPayment->PaymentId;
+        return $myPayment->PaymentRedirectUrl;
     }
-    public static function CheckPayment($pID){
-        $z=new static();
-        dd($z->client->GetPaymentState($pID));
+
+    public static function CheckPayment($pID): PaymentStateResponseModel
+    {
+        $z = new static();
+        return $z->client->GetPaymentState($pID);
     }
 }
