@@ -112,6 +112,9 @@ class Issue extends Model
     {
         return false;
     }
+    public function hasAnyProposals(){
+        return PaidService::where('issue', $this->id)->where('status',0)->count();
+    }
     public function getComments(){
         return Comment::where('issue',$this->id)->get()->all();
     }

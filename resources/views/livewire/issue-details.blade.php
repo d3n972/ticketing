@@ -72,13 +72,21 @@
                 </div>
 
             </x-dropform>
-            <button
-                wire:click="$emit('openModal', 'paid-service-form',{{ json_encode(['issue' => $issue]) }})"
-                class="text-purple-500 bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
-                type="button"
-            >
-                Trig. payment proposal
-            </button>
+
+            @if($issue->hasAnyProposals())
+                <button
+                    wire:click="$emit('openModal', 'paid-service-form',{{ json_encode(['issue' => $issue]) }})"
+                    class="bg-red-700 animate-pulse bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-cash" viewBox="0 0 16 16">
+                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                        <path
+                            d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                    </svg>
+                </button>
+            @endif
             <button
                 wire:click="$emit('openModal', 'label-form',{{ json_encode(['issue' => $issue]) }})"
                 class="text-purple-500 bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
@@ -141,7 +149,8 @@
                 wire:click="$emit('openModal', 'ticket-editor',{{ json_encode(['issue' => $issue]) }})"
                 class="text-purple-500 bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
                 type="button"
-            >[edit]</button>
+            >[edit]
+            </button>
         </div>
     </div>
     <div class="grid grid-cols-3 gap-5">
