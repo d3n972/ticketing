@@ -3,13 +3,11 @@
 
     @endpush
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        @include('components.page_title',['title'=>__('Issue details')])
     </x-slot>
 
 
-    <div class="container grid grid-col mx-auto mt-2">
+    <div class="grid grid-col mt-2">
         <div class="mx-auto w-8/12">
             @if (session()->has('message'))
                 <div

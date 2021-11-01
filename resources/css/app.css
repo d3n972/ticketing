@@ -4,4 +4,22 @@
 [x-cloak] {
     display: none;
 }
+.divide-fields>span{
+    flex-basis: 7%;
+}
+.divide-fields>span::before{
+    content: "";
+    display: inline-block;
+    height: 1em;
+    vertical-align: -0.1em;
+    margin-right: 8px;
+    @apply border border-gray-800;
+}
+.divide-fields>span:first-child::before {
+    border-left-color: transparent;
+    display: none;
+}
 
+.label-anim-remove{
+    animation: pulse 0.25s cubic-bezier(0.4, 0, 0.6, 1);
+}

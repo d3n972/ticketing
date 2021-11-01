@@ -13,11 +13,11 @@ class IssueDetails extends Component
    */
     public $issue;
     public function mount($iid){
-        $this->issue=\App\Models\Issue::with('author', 'assignee', 'severity')->where('id','=',$iid)->first();
+        $this->issue=Issue::getTicketById($iid);
+
     }
     public function render()
     {
-       // dd($this->iid);
         $dateColor="text-gray-900"; //default
         $dueDateDiffToToday=Carbon::now()->diffInDays($this->issue->due_at);
         if($dueDateDiffToToday<5){

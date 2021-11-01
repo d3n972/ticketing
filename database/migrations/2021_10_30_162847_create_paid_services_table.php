@@ -16,14 +16,14 @@ class CreatePaidServicesTable extends Migration
         Schema::create('paid_services', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->softDeletes(); //may be used to indicate when the proposal was rejected 
+            $table->softDeletes(); //may be used to indicate when the proposal was rejected
             $table->foreignId('issue')->constrained('issues','id');
             $table->foreignId('author')->constrained('users','id');
             $table->foreignId('client_assignee')->constrained('users','id');
             $table->string('public_id');
             $table->longtext('description')->nullable();
             $table->integer('status')->default(0); //
-            $table->float('price');
+            $table->unsignedBigInteger('price');
         });
     }
 

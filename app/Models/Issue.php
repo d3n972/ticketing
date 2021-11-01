@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Extensions\Auditable;
+use App\Extensions\AuditEntryTypes;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Issue extends Model
 {
@@ -18,7 +21,6 @@ class Issue extends Model
     public static function boot()
     {
         parent::boot();
-
         static::creating(function ($model) {
 
             /**
@@ -57,6 +59,16 @@ class Issue extends Model
 
     }
 
+    public static function getTicketById($id){
+        return static::with('author', 'assignee', 'severity')->where('id','=',$id)->orWhere('ticket_id','=',$id)->first();
+    }
+    public function getCreatedAt(){
+        $c= Carbon::parse($this->created_at);
+        return $c->format('Y. m. d. H:i');
+    }
+    public function getContent(){
+        return  Str::markdown($this->content);
+    }
     public function getTicketIdModel()
     {
         $ticketIdInstance = TicketId::where('project', '=', $this->project()->first()->id)->first();
@@ -99,5 +111,15 @@ class Issue extends Model
     public function isWorkInProgress()
     {
         return false;
+    }
+    public function hasAnyProposals(){
+        return PaidService::where('issue', $this->id)->where('status',0)->count();
+    }
+    public function getComments(){
+        return Comment::where('issue',$this->id)->get()->all();
+    }
+    public function getTimeHuman($time,$format='Y. m. d. H:i'){
+        $i=Carbon::parse($time);
+        return $i->format($format);
     }
 }

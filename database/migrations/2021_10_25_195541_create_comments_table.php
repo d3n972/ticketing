@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->foreignId('issue')->constrained('issues','id');
             $table->unsignedBigInteger('reply_to')->nullable()->default(null);
             $table->longText('content');
+            $table->integer('type');
         });
     }
 

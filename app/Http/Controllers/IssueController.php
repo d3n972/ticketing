@@ -17,7 +17,7 @@ class IssueController extends Controller
 
     public function details($id)
     {
-        return view('issues.view', ['issue' => (Issue::with('author', 'assignee', 'severity')->where('id', '=', $id)->first())]);
+        return view('issues.view', ['issue' => Issue::getTicketbyId($id)]);
     }
 
     public function new()

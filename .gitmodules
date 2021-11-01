@@ -1,0 +1,3 @@
+[submodule "app\\Barion"]
+	path = app\\Barion
+	url = https://github.com/barion/barion-web-php.git
