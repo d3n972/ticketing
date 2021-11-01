@@ -73,6 +73,13 @@
 
             </x-dropform>
             <button
+                wire:click="$emit('openModal', 'paid-service-form',{{ json_encode(['issue' => $issue]) }})"
+                class="text-purple-500 bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                type="button"
+            >
+                Trig. payment proposal
+            </button>
+            <button
                 wire:click="$emit('openModal', 'label-form',{{ json_encode(['issue' => $issue]) }})"
                 class="text-purple-500 bg-transparent border border-solid border-gray-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
                 type="button"
