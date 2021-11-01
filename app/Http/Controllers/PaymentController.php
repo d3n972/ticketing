@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaidService;
 use App\Models\Payment;
 use App\Models\PaymentData;
 use Carbon\Carbon;
@@ -26,6 +27,12 @@ class PaymentController extends Controller
             $k->order_number = $w->OrderNumber;  //public id for the paid service
             $k->completed_at = Carbon::parse($w->CompletedAt);
             $k->save();
+            if ($k->status == 'Canceled') {
+                $p = PaidService::where('public_id', $k->order_number)->first();
+                $p->public_id = $p->genPublicId();
+                $p->status = 0;
+                $p->save();
+            }
 
         }
         return response()->redirectTo($w->RedirectUrl);
@@ -34,6 +41,6 @@ class PaymentController extends Controller
     public function afterPayment(Request $r)
     {
         $paymentId = $r->query('paymentId');
-        return view('payment.result',['pd'=>PaymentData::where('payment_id', $paymentId)->first()]);
+        return view('payment.result', ['pd' => PaymentData::where('payment_id', $paymentId)->first()]);
     }
 }
