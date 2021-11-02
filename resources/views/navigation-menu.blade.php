@@ -9,7 +9,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <x-jet-application-mark class="block h-9 w-auto"/>
                     </a>
                 </div>
 
@@ -100,15 +100,15 @@
                                     </div>
 
                                     @foreach (Auth::user()->allTeams() as $team)
-                                        <x-jet-switchable-team :team="$team" />
+                                        <x-jet-switchable-team :team="$team"/>
                                     @endforeach
                                 </div>
                             </x-slot>
                         </x-jet-dropdown>
                     </div>
-                @endif
+            @endif
 
-                <!-- Settings Dropdown -->
+            <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown
                         align="right"
@@ -234,6 +234,21 @@
             >
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+            <div class="block px-4 py-2 text-xs text-gray-400">
+                Issue management
+            </div>
+            <x-jet-responsive-nav-link
+                href="{{ route('issue.list') }}"
+                :active="request()->routeIs('issue.list')"
+            >
+                {{ __('List issues') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link
+                href="{{ route('issue.create') }}"
+                :active="request()->routeIs('issue.create')"
+            >
+                {{ __('New issue') }}
+            </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -273,7 +288,7 @@
                     </x-jet-responsive-nav-link>
                 @endif
 
-                <!-- Authentication -->
+            <!-- Authentication -->
                 <form
                     method="POST"
                     action="{{ route('logout') }}"

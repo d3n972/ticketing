@@ -29,7 +29,7 @@
     </x-slot>
 
 
-    <div class="mx-auto w-8/12 mt-4">
+    <div class="lg:px-0 lg:w-8/12 mt-4 mx-auto px-3">
         <livewire:create-ticket />
     </div>
 

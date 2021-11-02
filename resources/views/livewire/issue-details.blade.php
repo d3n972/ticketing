@@ -153,7 +153,7 @@
             </button>
         </div>
     </div>
-    <div class="grid grid-cols-3 gap-5">
+    <div class="gap-5 grid grid-cols-1 lg:grid-cols-3 lg:grid-flow-col">
         <div class="col-span-2">
             <div class="content">
                 {!! $issue->getContent() !!}
@@ -185,50 +185,50 @@
             </div>
         </div>
 
-        <div>
+        <div class="order-first lg:order-none">
             <div class="border-gray-500 border-t">
                 <div class="grid grid-flow-col">
                     <div class="grid-span-2">
                         <dl class="divide-gray-800 divide-y">
-                            <div class="bg-gray-900 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-900 flex gap-3 lg:block lg:gap-0 px-4 py-5 sm:grid sm:grid-flow-row sm:px-6">
                                 <dt class="text-sm font-medium text-white">
                                     {{ __('Title') }}
                                 </dt>
-                                <dd class="mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
+                                <dd class="lg:mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
                                     {{ $issue->title }}
                                 </dd>
                             </div>
-                            <div class="bg-gray-900 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-900 flex gap-3 lg:block lg:gap-0 px-4 py-5 sm:grid sm:grid-flow-row sm:px-6">
                                 <dt class="text-sm font-medium text-white">
                                     {{ __('Author') }}
                                 </dt>
-                                <dd class="mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
+                                <dd class="lg:mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
                                     {{ \App\Models\User::where('id', '=', $issue->author)->first()->name }}
                                     ({{ \App\Models\User::where('id', '=', $issue->author)->first()->email }})
                                 </dd>
                             </div>
 
-                            <div class="bg-gray-900 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-900 flex gap-3 lg:block lg:gap-0 px-4 py-5 sm:grid sm:grid-flow-row sm:px-6">
                                 <dt class="text-sm font-medium text-white">
                                     {{ __('Assignee') }}
                                 </dt>
-                                <dd class="mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
+                                <dd class="lg:mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
                                     {{ \App\Models\User::where('id', '=', $issue->assignee)->first()->name }}
                                 </dd>
                             </div>
-                            <div class="bg-gray-900 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-900 flex gap-3 lg:block lg:gap-0 px-4 py-5 sm:grid sm:grid-flow-row sm:px-6">
                                 <dt class="text-sm font-medium text-white">
                                     {{ __('Severity') }}
                                 </dt>
-                                <dd class="mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
+                                <dd class="lg:mt-1 text-sm text-white sm:mt-0 sm:col-span-2">
                                     {{ $issue->severity()->first()->name }}
                                 </dd>
                             </div>
-                            <div class="bg-gray-900 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-900 flex gap-3 lg:block lg:gap-0 px-4 py-5 sm:grid sm:grid-flow-row sm:px-6">
                                 <dt class="text-sm font-medium text-white">
                                     {{ __('Due date') }}
                                 </dt>
-                                <dd class="mt-1 text-sm {{ $dateColor }} sm:mt-0 sm:col-span-2">
+                                <dd class="lg:mt-1 text-sm {{ $dateColor }} sm:mt-0 sm:col-span-2">
                                     {{ $issue->due_at }}
                                 </dd>
                             </div>

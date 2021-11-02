@@ -34,7 +34,7 @@
                         >
                     </label>
                 </div>
-                <div class="gap-5 grid grid-cols-3">
+                <div class="gap-5 grid lg:grid-cols-3">
                     <label class="block">
                         <span class="text-gray-700">{{ __('Severity') }}</span>
                         <select

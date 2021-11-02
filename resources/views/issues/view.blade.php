@@ -8,7 +8,7 @@
 
 
     <div class="grid grid-col mt-2">
-        <div class="mx-auto w-8/12">
+        <div class="lg:px-0 lg:w-8/12 mx-auto px-5">
             @if (session()->has('message'))
                 <div
                     class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3"
