@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
+        "ext-imap": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "hidehalo/nanoid-php": "^1.1",
@@ -15,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "livewire-ui/modal": "^1.0",
         "livewire/livewire": "^2.5",
-        "mediconesystems/livewire-datatables": "^0.6.8"
+        "mediconesystems/livewire-datatables": "^0.6.8",
+        "webklex/laravel-imap": "^2.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -61,29 +61,30 @@ class CreateTicket extends Component
         $i->title = $validatedData['title'];
         $i->severity = $validatedData['severity'] ?? 1;
         $i->project = $validatedData['project'] ?? 1;
-        $i->content = $r->user()->getCreatorDisclaimer().$validatedData['description'];
+        $i->content = $validatedData['description'];
         $i->due_at = $validatedData['due_at'];
         $i->assignee = 1;
-        if ($i->saveOrFail()) {
-            if (isset($validatedData['attachments'])) {
-                foreach ($validatedData['attachments'] as $attachment) {
-                    $fn = v4();
-                    $attachment->storeAs('attachments', $fn);
-                    $a = new Attachment();
-                    $a->issue = $i->id;
-                    $a->size = $attachment->getSize();
-                    $a->filename = $fn;
-                    $a->original_name = $attachment->getClientOriginalName();
-                    $a->created_by = $r->user()->id;
-                    $a->save();
-                }
+        if ($i->saveOrFail() && isset($validatedData['attachments'])) {
+
+            foreach ($validatedData['attachments'] as $attachment) {
+                $fn = v4();
+                $attachment->storeAs('attachments', $fn);
+                $a = new Attachment();
+                $a->issue = $i->id;
+                $a->size = $attachment->getSize();
+                $a->filename = $fn;
+                $a->original_name = $attachment->getClientOriginalName();
+                $a->created_by = Auth::user();
+                $a->save();
+
             }
-            Mail::to($r->user())->send((new \App\Mail\IssueFiled($i))->build());
         }
+        Mail::to($r->user())->send((new \App\Mail\IssueFiled($i))->build());
 
         session()->flash('message', __('Ticket has been created: ') . $i->id);
 
     }
+
 
     public function render(Request $r)
     {

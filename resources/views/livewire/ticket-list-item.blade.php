@@ -10,15 +10,15 @@
 
             <div class="grid grid-cols-3">
                 <div class="col-span-2 flex flex-row gap-4">
+                    <div class="flex gap-3">
                     <span>
-                        <a href="/issue/{{ $issue->ticket_id }}">
+                        <a href="/issue/{{ $issue->ticket_id }}" class="text-blue-300 underline">
                             {{ $issue->ticket_id }}
                         </a>
                     </span>
-                    <div class="flex">
+
                         <span>{{ $issue->title }}</span>
-                    <span>{{$issue->ticket_id}}</span>
-                    <span>{{$issue->title}}</span>
+
                     </div>
                 </div>
                 <div class="flex gap-4 ml-auto mr-0">

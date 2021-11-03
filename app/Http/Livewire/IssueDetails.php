@@ -18,10 +18,11 @@ class IssueDetails extends Component
     }
     public function render()
     {
-        $dateColor="text-gray-900"; //default
         $dueDateDiffToToday=Carbon::now()->diffInDays($this->issue->due_at);
         if($dueDateDiffToToday<5){
           $dateColor="text-red-500 font-bold";
+        }else{
+            $dateColor='text-white';
         }
         return view('livewire.issue-details',['issue'=>$this->issue,'dateColor'=>$dateColor]);
     }

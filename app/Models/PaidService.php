@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Redirect;
 use PaymentType;
 
 /**
- * @property App\Models\User author
- * @property App\Models\Issue issue
- * @property App\Models\User client_assignee
+ * @property User author
+ * @property Issue issue
+ * @property User client_assignee
  * @property string public_id
  * @property string description
  * @property integer status
@@ -49,11 +49,11 @@ class PaidService extends Model
         return User::where('id', $this->client_assignee)->first();
     }
 
-    public function accpetProposal()
+    public function accpetProposal(): string
     {
         $this->status = 1;
         $this->save();
-        $k = new \App\Models\Payment();
+        $k = new Payment();
         $i = $k->newItem();
         $i->setSKU($this->issue()->ticket_id)
             ->setName("Paid development")
