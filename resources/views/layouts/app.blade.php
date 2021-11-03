@@ -49,7 +49,7 @@
                     <div>{{env('APP_NAME')}}</div>
                     <p>{{env('APP_URL')}}</p>
                 </div>
-                <div>asd</div>
+                <div>Created with ❤️ by D3n</div>
                 <div>asd</div>
             </div>
         </div>
