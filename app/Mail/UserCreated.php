@@ -3,17 +3,18 @@
 namespace App\Mail;
 
 use App\Models\Issue;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Queue\SerializesModels;
 
-class IssueFiled extends Mailable
+class UserCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $issue;
+    public $user, $pass;
     public $from = [
         ['address' => "support@d3n.it",
             'name' => 'D3nSupport'
@@ -26,9 +27,10 @@ class IssueFiled extends Mailable
      *
      * @return void
      */
-    public function __construct(Issue $issue)
+    public function __construct(User $u, string $pass)
     {
-        $this->issue = $issue;
+        $this->user = $u;
+        $this->pass = $pass;
 
     }
 
@@ -39,10 +41,10 @@ class IssueFiled extends Mailable
      */
     public function build()
     {
-        return $this->subject('New support ticket has been created')
+        return $this->subject('New Account for '.env('APP_NAME'))
             ->html((new MailMessage)
                 ->from($this->from)
-                ->markdown('mail.issue_filed', ['issue' => $this->issue])
+                ->markdown('mail.user_created', ['user' => $this->user,'pass'=>$this->pass])
                 ->render()
             );
     }

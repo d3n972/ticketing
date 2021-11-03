@@ -7,7 +7,10 @@ use App\Extensions\AuditEntryTypes;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use function Ramsey\Uuid\v4;
 
 class Issue extends Model
 {
@@ -59,16 +62,22 @@ class Issue extends Model
 
     }
 
-    public static function getTicketById($id){
-        return static::with('author', 'assignee', 'severity')->where('id','=',$id)->orWhere('ticket_id','=',$id)->first();
+    public static function getTicketById($id)
+    {
+        return static::with('author', 'assignee', 'severity')->where('id', '=', $id)->orWhere('ticket_id', '=', $id)->first();
     }
-    public function getCreatedAt(){
-        $c= Carbon::parse($this->created_at);
+
+    public function getCreatedAt()
+    {
+        $c = Carbon::parse($this->created_at);
         return $c->format('Y. m. d. H:i');
     }
-    public function getContent(){
-        return  Str::markdown($this->content);
+
+    public function getContent()
+    {
+        return Str::markdown($this->content);
     }
+
     public function getTicketIdModel()
     {
         $ticketIdInstance = TicketId::where('project', '=', $this->project()->first()->id)->first();
@@ -105,21 +114,42 @@ class Issue extends Model
 
     public function attachments()
     {
-        return $this->hasMany(Attachment::class, 'issue')->latest()->get();
+
+        return $this->hasMany(Attachment::class, 'issue')->get();
     }
 
     public function isWorkInProgress()
     {
         return false;
     }
-    public function hasAnyProposals(){
-        return PaidService::where('issue', $this->id)->where('status',0)->count();
+
+    public function hasAnyProposals()
+    {
+        return PaidService::where('issue', $this->id)->where('status', 0)->count();
     }
-    public function getComments(){
-        return Comment::where('issue',$this->id)->get()->all();
+
+    public function getComments()
+    {
+        return Comment::where('issue', $this->id)->get()->all();
     }
-    public function getTimeHuman($time,$format='Y. m. d. H:i'){
-        $i=Carbon::parse($time);
+
+    public function getTimeHuman($time, $format = 'Y. m. d. H:i')
+    {
+        $i = Carbon::parse($time);
         return $i->format($format);
+    }
+
+
+    public function attachExistingFile($filename, $size)
+    {
+
+        $a = new Attachment();
+        $a->issue = $this->id;
+        $a->size = $size;
+        $a->filename = $filename;
+        $a->original_name = $filename;
+        $a->created_by = Auth::user() ?? 1;
+        $a->save();
+
     }
 }
