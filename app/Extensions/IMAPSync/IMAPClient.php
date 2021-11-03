@@ -20,16 +20,20 @@ class IMAPClient
 
     public function decodeSenderToClass($sender)
     {
-        $q = imap_mime_header_decode($sender);
-        if (sizeof($q) > 1) {
-            $y = new \stdClass();
-            $y->text = $q[0]->text . $q[1]->text;
-            $w[] = $y;
-        } else {
-            $w = $q[0];
+        if (strpos($sender,'?=')) {
+            $wrong_charset = imap_mime_header_decode($sender);
+
+            $sender = '';
+
+            for ($i=0; $i<count($wrong_charset); $i++) {
+                $sender .= "{$wrong_charset[$i]->text} ";
+            }
+
         }
 
-        $from = (imap_rfc822_parse_headers('From: ' . $w[0]->text))->from[0];
+
+
+        $from = (imap_rfc822_parse_headers('From: ' . $sender))->from[0];
         $o = new \stdClass();
 
         $o->name = $from->personal;
@@ -42,6 +46,7 @@ class IMAPClient
         $f = $this->oClient->getFolder('support');
         $k = [];
         foreach ($f->messages()->unseen()->get() as $m) {
+
             $from = $this->decodeSenderToClass($m->get('fromaddress')->first());
             $attachments = $m->getAttachments();
             $attachmentCount = $attachments->count();
