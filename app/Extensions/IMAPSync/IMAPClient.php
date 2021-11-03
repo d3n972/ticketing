@@ -21,11 +21,19 @@ class IMAPClient
     public function decodeSenderToClass($sender)
     {
         $q = imap_mime_header_decode($sender);
-        $from= (imap_rfc822_parse_headers('From: '.$q[0]->text))->from[0];
+        if (sizeof($q) > 1) {
+            $y = new \stdClass();
+            $y->text = $q[0]->text . $q[1]->text;
+            $w[] = $y;
+        } else {
+            $w = $q[0];
+        }
+
+        $from = (imap_rfc822_parse_headers('From: ' . $w[0]->text))->from[0];
         $o = new \stdClass();
 
-        $o->name =$from->personal;
-        $o->address = sprintf('%s@%s',$from->mailbox,$from->host);
+        $o->name = $from->personal;
+        $o->address = sprintf('%s@%s', $from->mailbox, $from->host);
         return $o;
     }
 
