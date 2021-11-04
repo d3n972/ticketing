@@ -47,7 +47,7 @@
                             fill="white"></path>
                     </svg>
 
-                    <span class="text-white text-2xl mx-2 font-semibold">Dashboard</span>
+                    <span class="text-white text-2xl mx-2 font-semibold">{{env('APP_NAME')}}</span>
                 </div>
             </div>
             <div>
