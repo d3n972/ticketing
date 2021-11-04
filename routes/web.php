@@ -3,11 +3,14 @@
 use App\Http\Controllers\IssueController;
 use App\Http\Livewire\TicketList;
 use App\Models\Client;
+use App\Models\Issue;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to("/dashboard");
 });
+
 Route::get('/processPayment', [\App\Http\Controllers\PaymentController::class, 'processPayment'])->name('payment.process');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
