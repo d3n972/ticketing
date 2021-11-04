@@ -3,11 +3,14 @@
 use App\Http\Controllers\IssueController;
 use App\Http\Livewire\TicketList;
 use App\Models\Client;
+use App\Models\Issue;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to("/dashboard");
 });
+
 Route::get('/processPayment', [\App\Http\Controllers\PaymentController::class, 'processPayment'])->name('payment.process');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -35,10 +39,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::name('issue.')->group(function () {
             Route::get('/', TicketList::class)->name('list');
             Route::get('/new', [IssueController::class, 'new'])->name('create');
-            Route::post('/modify', [IssueController::class, 'modify_ticket'])->name('modify');
             Route::get('/view/{id}', [IssueController::class, 'details'])->name('details');
-            Route::post('/assign', [IssueController::class, 'assign_ticket'])->name('assign');
-            Route::post('/lock', [IssueController::class, 'switchStatus'])->name('lock');
+            Route::get('/kanboard', function () {
+                return view('issues.kanboard');
+            })->name('kanboard');
             Route::get('/{id}', [IssueController::class, 'details']);
         });
     });
