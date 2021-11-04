@@ -12,7 +12,11 @@
     <ul>
         @foreach($issues as $issue)
             @include('livewire.ticket-list-item',['issue'=>$issue])
+
         @endforeach
+        <div>
+            {{$issues->links()}}
+        </div>
         @if(sizeof($issues)==0)
             <div class="flex font-black justify-center text-xl">
                 <h2>There are no tickets...</h2>

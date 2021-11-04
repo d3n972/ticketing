@@ -9,6 +9,6 @@ class TicketList extends Component
 {
     public function render()
     {
-        return view('livewire.ticket-list',['issues'=>Issue::all()->all()]);
+        return view('livewire.ticket-list',['issues'=>Issue::paginate(10)]);
     }
 }
