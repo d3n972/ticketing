@@ -39,7 +39,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="px-5 md:px-auto">
                 {{ $slot }}
             </main>
         </div>
